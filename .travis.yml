@@ -4,9 +4,6 @@ language: python
 script:
   - echo "dependency installation"
 
-install:
-  - skip
-
 before_deploy:
   # Install AWS CLI
   - sudo apt-get update
