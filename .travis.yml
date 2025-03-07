@@ -1,11 +1,25 @@
 dist: focal
 language: python
+
 script:
   - echo "dependency installation"
+
 install:
   - skip
 
-deploy: 
+before_deploy:
+  # Install AWS CLI
+  - sudo apt-get update
+  - sudo apt-get install awscli -y
+  - aws --version  # Verify AWS CLI installation
+  - echo "Configuring AWS credentials"
+  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+  - aws configure set default.region us-east-2
+  - echo "AWS CLI Configuration"
+  - aws sts get-caller-identity  # Confirm the credentials are being recognized
+
+deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
@@ -15,12 +29,3 @@ deploy:
   bucket_name: "elasticbeanstalk-us-east-2-985539800244"
   on:
     branch: main
-
-before_deploy:
-  - echo "Configuring AWS credentials"
-  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-  - aws configure set default.region us-east-2
-  - echo "AWS CLI Configuration"
-  - aws sts get-caller-identity
-
