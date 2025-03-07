@@ -7,9 +7,11 @@ install:
 
 deploy: 
   provider: elasticbeanstalk
-  access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   region: "us-east-2"
   app: "ebdjango"
   env: "ebdjango-dev"
   bucket_name: "elasticbeanstalk-us-east-2-985539800244"
+  on:
+    branch: main
