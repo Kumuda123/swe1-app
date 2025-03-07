@@ -4,6 +4,9 @@ language: python
 script:
   - echo "dependency installation"
 
+install:
+  - pip install -r requirements.txt  # Install all dependencies from requirements.txt
+
 before_deploy:
   # Install AWS CLI
   - sudo apt-get update
