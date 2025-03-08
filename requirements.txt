@@ -2,3 +2,6 @@ Django==2.2
 pytz==2025.1
 sqlparse
 gunicorn
+black
+flake8
+coverage
